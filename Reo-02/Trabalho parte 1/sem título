@@ -1,0 +1,48 @@
+/*
+------------- Trabalho prático --------------   
+
+Grupo 4:
+ - Beatriz Fernandes Teixeira
+ - Dênis de Souza Cordeiro
+ - Ronald de Souza Galdino
+
+----------- data_athlete_game.7z ------------
+
+*/
+
+#include <iostream>
+#include <fstream> 
+using namespace std;
+
+struct atleta{
+	// Id,Name,City,Sport,Event,NOC
+	int id;
+	char nome[20], pais[20], esporte[20], evento[20], noc[20];
+};
+
+int main() {
+  
+	ifstream arquivo_csv("data_athlete_event.csv");
+	ofstream arquivo_bin("data_athlete_event.bin");
+
+	atleta dados;
+
+	while(arquivo_csv){
+		//arquivo_csv.read((char *) (&dados),sizeof(atleta));
+    //while(arquivo_csv >> dados){
+      arquivo_csv >> dados.id >> dados.nome >> dados.pais
+      >> dados.esporte >> dados.evento >> dados.noc;
+      
+      arquivo_bin.write((char *) &dados,sizeof(atleta));
+
+      cout << dados.id << dados.nome << dados.pais
+      << dados.esporte << dados.evento << dados.noc << endl;
+    }
+	//}
+
+
+	arquivo_csv.close();
+	arquivo_bin.close();
+
+	return 0;
+}
